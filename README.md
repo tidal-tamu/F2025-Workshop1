@@ -35,6 +35,8 @@ pip install -r requirements.txt
 
 4. **Deactivate the virtual environment** when done:
 
+JUST TO CLARIFY, THIS IS DONE AT THE END, NOT THE BEGINNING!
+
 ```
 deactivate
 ```

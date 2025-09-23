@@ -16,7 +16,7 @@ ai_on = False  # TODO: set True to enable AI
 # 7 = discretized horizontal distance to pipe
 # 21 = discretized vertical distance to pipe
 # 2 = # of action options (jump or don't jump)
-Q = np.zeros((__, __, __))  # TODO fill in correct dimensions and dtype
+Q = np.zeros((__, __, __)) 
 
 # =========================
 # STATE DISCRETIZATION FUNCTION

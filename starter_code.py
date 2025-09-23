@@ -30,7 +30,7 @@ def pipe_relative_to_bird(birdxpos, birdypos, bttm_pipes):
     
     # Note: Pygame Y coordinate increases downwards!
 
-    y = None # TODO: set vertical distance from bottom pipe to bird
+    y = ____ # TODO: set vertical distance from bottom pipe to bird
     if y < 0:
         SCREEN_HEIGHT = 511
         BASE_Y = SCREEN_HEIGHT * 0.8
@@ -42,19 +42,30 @@ def pipe_relative_to_bird(birdxpos, birdypos, bttm_pipes):
 # =========================
 # Q-LEARNING UPDATE
 # =========================
-def Q_update(x_prev, y_prev, jump, reward, x_new, y_new):
+def Q_update(x_prev, y_prev, jump, reward_or_penalty, x_new, y_new):
     """
     Updates Q-table using the Bellman equation.
+    Q(s, a) ← (1 - α) * Q(s, a) + α * [ r + γ * max(Q(s', a')) - Q(s, a) ]
+
+    where:
+        s   = current state
+        a   = action taken in state s
+        r   = reward/penalty received after taking action a
+        s'  = next state after action a
+        a'  = possible actions in state s'
+        α   = learning rate (0 < α ≤ 1)
+        γ   = discount factor (0 ≤ γ ≤ 1)
+
     """
 
 
     # TODO: fill in the Bellman equation
     if jump:
         Q[x_prev][y_prev][1] = 0.4 * _____ + \
-                               (0.6) * (reward + max(_____, _____))
+                               (0.6) * (reward_or_penalty + max(_____, _____))
     else:
         Q[x_prev][y_prev][0] = 0.4 * _____ + \
-                               (0.6) * (reward + max(_____, _____))
+                               (0.6) * (reward_or_penalty + max(_____, _____))
 
 
 # =========================

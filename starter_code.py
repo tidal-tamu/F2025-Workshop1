@@ -26,7 +26,7 @@ def pipe_relative_to_bird(birdxpos, birdypos, bttm_pipes):
     Maps continuous bird position to discrete state for Q-learning.
     """
     # TODO: compute horizontal distance to the closest bottom pipe
-    x = min(280, _____)  # what key gives the pipe's x?
+    x = min(280, bttm_pipes[0]['x'] - ____)
     
     # Note: Pygame Y coordinate increases downwards!
 

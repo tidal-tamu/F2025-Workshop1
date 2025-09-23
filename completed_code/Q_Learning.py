@@ -2,17 +2,19 @@ import numpy
 import random
 
 # Manual play or AI play
-ai_on = True
+ai_on = False
 
 # Initialize Q-table
 Q = numpy.zeros((7,21,2), dtype=float)
 
-def bird_relative_to_pipe(birdxpos, birdypos, bttm_pipes):
-    x = min(280, bttm_pipes[0]['x'])
+def pipe_relative_to_bird(birdxpos, birdypos, bttm_pipes):
+    x = min(280, bttm_pipes[0]['x'] - birdxpos)
     y = bttm_pipes[0]['y'] - birdypos
     if y < 0:
-        y = abs(y) + 408
-    return int(x/40 - 1), int(y/40)
+        SCREEN_HEIGHT = 511
+        BASE_Y = SCREEN_HEIGHT * 0.8
+        y = abs(y) + BASE_Y
+    return int(x / 40 - 1), int(y / 40)
 
 def Q_update(x_prev, y_prev, jump, reward, x_new, y_new):
     if jump:
@@ -31,7 +33,7 @@ def ai_didnt_crash(x_prev, y_prev, jump, x_new, y_new):
     Q_update(x_prev, y_prev, jump, reward, x_new, y_new)
 
 def ai_passed_pipe(x_prev, y_prev, jump, x_new, y_new):
-    reward = 15
+    reward = 30
     Q_update(x_prev, y_prev, jump, reward, x_new, y_new)
 
 def ai_play(x, y):
@@ -44,33 +46,19 @@ def ai_play(x, y):
 
 
 
-'''
-
-If you would like to experiment with early random actions, uncomment the code below.
-
-Epsilon-greedy action selection is a common strategy in reinforcement learning to balance exploration and exploitation.
-It is done by doing a random action by choosing a random number between 0 and 1 and if it is less than epsilon, 
-the AI will do a random action.
-
-'''
 
 
-# # Epsilon-greedy params
-# epsilon = 1.0
-# epsilon_min = 0.01
-# epsilon_decay = 0.5  # shrink a little each episode
+# epsilon = 0.2
+# epsilon_min = 0.00001
+# epsilon_decay = 0.8
 # def epsilon_greedy_ai_play(x, y):
 #     global epsilon
 #     jump = False
-    
-#     # epsilon-greedy: explore sometimes
 #     if random.uniform(0, 1) < epsilon:
-#         jump = random.choice([False, True])
-#         print(epsilon)
+#         jump = random.choice([False, False, False, True])
 #     else:
 #         if Q[x][y][1] > Q[x][y][0]:
 #             jump = True
-
 #     return jump
 
 # def decay_epsilon():

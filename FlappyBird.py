@@ -1,6 +1,12 @@
 import random
 import sys
-import Q_Learning as ql
+
+
+
+import completed_code.Q_Learning as ql # TODO: comment this!
+# import starter_code as ql            # TODO: uncomment this!
+
+
 import pygame
 from pygame.locals import *
 import matplotlib.pyplot as plt
@@ -74,10 +80,11 @@ def game_start(generation,x,y):
 	
 	while(True):
 		
-		x_prev,y_prev = ql.bird_relative_to_pipe(birdxpos,birdypos,bttm_pipes)
+		x_prev,y_prev = ql.pipe_relative_to_bird(birdxpos,birdypos,bttm_pipes)
 		jump = False
 		if ql.ai_on:
 			jump = ql.ai_play(x_prev,y_prev)
+			# jump = ql.epsilon_greedy_ai_play(x_prev, y_prev)
 
 
 		for event in pygame.event.get():
@@ -104,7 +111,7 @@ def game_start(generation,x,y):
 			pipeMidPos = pipe ['x'] +IMAGES['pipe'][0].get_width()/2
 			if pipeMidPos <= playerMidPos < pipeMidPos +4 :
 
-				x_new,y_new = ql.bird_relative_to_pipe(birdxpos,birdypos,bttm_pipes)
+				x_new,y_new = ql.pipe_relative_to_bird(birdxpos,birdypos,bttm_pipes)
 				ql.ai_passed_pipe(x_prev, y_prev, jump, x_new, y_new)
 				
 				score += 1
@@ -150,8 +157,7 @@ def game_start(generation,x,y):
 		# Collision Detection
 
 		birdCrashed = Collision(birdxpos,birdypos,up_pipes,bttm_pipes)
-		x_new,y_new = ql.bird_relative_to_pipe(birdxpos,birdypos,bttm_pipes)
-		
+		x_new,y_new = ql.pipe_relative_to_bird(birdxpos,birdypos,bttm_pipes)
 		if birdCrashed:
 			ql.ai_crashed(x_prev, y_prev, jump, x_new, y_new)
 			# ql.decay_epsilon() # decay epsilon after each episode

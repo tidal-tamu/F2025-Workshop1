@@ -2,7 +2,7 @@ import random
 import sys
 
 
-
+# make sure starter_code.py has been completed first!
 import completed_code.Q_Learning as ql # TODO: comment this!
 # import starter_code as ql            # TODO: uncomment this!
 

@@ -45,16 +45,13 @@ def pipe_relative_to_bird(birdxpos, birdypos, bttm_pipes):
 def Q_update(x_prev, y_prev, jump, reward_or_penalty, x_new, y_new):
     """
     Updates Q-table using the Bellman equation.
-    Q(s, a) ← (1 - α) * Q(s, a) + α * [ r + γ * max(Q(s', a')) - Q(s, a) ]
+    Q[xprev​][yprev​][a] ← (1 − α) ⋅ Q[xprev​][yprev​][a] + α ⋅ ( reward_or_penalty + γ ⋅ max( Q[xnew​][ynew​][no jump] , Q[xnew​][ynew​][jump] ) )
 
-    where:
-        s   = current state
-        a   = action taken in state s
-        r   = reward/penalty received after taking action a
-        s'  = next state after action a
-        a'  = possible actions in state s'
-        α   = learning rate (0 < α ≤ 1)
-        γ   = discount factor (0 ≤ γ ≤ 1)
+    Where:
+        a = 1 if jump, a = 0 if no jump 
+        α = learning rate 
+        γ = discount factor 
+        reward_or_penalty = immediate reward
 
     """
 

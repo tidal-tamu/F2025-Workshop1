@@ -72,7 +72,7 @@ def Q_update(x_prev, y_prev, jump, reward_or_penalty, x_new, y_new):
 # REWARD FUNCTIONS
 # =========================
 def ai_crashed(x_prev, y_prev, jump, x_new, y_new):
-    penalty = ___  # TODO: set reward for not crashing
+    penalty = ___  # TODO: set penalty for crashing
     Q_update(x_prev, y_prev, jump, penalty, x_new, y_new)
 
 def ai_didnt_crash(x_prev, y_prev, jump, x_new, y_new):
